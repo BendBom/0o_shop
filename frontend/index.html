@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O_Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo" onclick="navigate('catalog')">O_Shop</a>
+            <nav id="nav-links">
+                <a href="#" onclick="navigate('catalog')">Catalog</a>
+                <a href="#" onclick="navigate('cart')" id="nav-cart" style="display:none;">Cart <span id="cart-count"></span></a>
+                <a href="#" onclick="navigate('login')" id="nav-login">Login</a>
+                <a href="#" onclick="navigate('register')" id="nav-register">Register</a>
+                <a href="#" onclick="logout()" id="nav-logout" style="display:none;">Logout</a>
+                <span id="nav-user" style="display:none;"></span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- AUTH: LOGIN -->
+        <section id="page-login" class="page" style="display:none;">
+            <h1>Login</h1>
+            <form id="login-form" onsubmit="return handleLogin(event)">
+                <input type="text" id="login-username" placeholder="Username" required autocomplete="username">
+                <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
+                <button type="submit">Sign In</button>
+                <p class="form-msg" id="login-msg"></p>
+            </form>
+        </section>
+
+        <!-- AUTH: REGISTER -->
+        <section id="page-register" class="page" style="display:none;">
+            <h1>Register</h1>
+            <form id="register-form" onsubmit="return handleRegister(event)">
+                <input type="text" id="reg-username" placeholder="Username (min 3 chars, a-z, 0-9, _)" required autocomplete="username">
+                <input type="email" id="reg-email" placeholder="Email" required autocomplete="email">
+                <input type="password" id="reg-password" placeholder="Password (min 8 chars)" required autocomplete="new-password">
+                <button type="submit">Register</button>
+                <p class="form-msg" id="register-msg"></p>
+            </form>
+        </section>
+
+        <!-- CATALOG -->
+        <section id="page-catalog" class="page">
+            <h1>Product Catalog</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search products..." oninput="debounceSearch()">
+            </div>
+            <div id="products-grid" class="products-grid"></div>
+            <p id="catalog-empty" style="display:none;">No products found.</p>
+        </section>
+
+        <!-- CART -->
+        <section id="page-cart" class="page" style="display:none;">
+            <h1>Shopping Cart</h1>
+            <div id="cart-items"></div>
+            <div id="cart-total" class="cart-total"></div>
+            <p id="cart-empty" style="display:none;">Your cart is empty.</p>
+            <button id="clear-cart-btn" onclick="clearCart()" style="display:none;">Clear Cart</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 O_Shop — Pet Project</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
